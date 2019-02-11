@@ -5,21 +5,21 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : poxml
-Version  : 18.08.0
-Release  : 1
-URL      : https://download.kde.org/stable/applications/18.08.0/src/poxml-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/poxml-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/poxml-18.08.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 18.12.2
+Release  : 2
+URL      : https://download.kde.org/stable/applications/18.12.2/src/poxml-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/poxml-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/poxml-18.12.2.tar.xz.sig
+Summary  : Translates DocBook XML files using gettext po files
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0
-Requires: poxml-bin
-Requires: poxml-license
-Requires: poxml-man
+Requires: poxml-bin = %{version}-%{release}
+Requires: poxml-license = %{version}-%{release}
+Requires: poxml-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : gettext-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 No detailed description available
@@ -27,8 +27,8 @@ No detailed description available
 %package bin
 Summary: bin components for the poxml package.
 Group: Binaries
-Requires: poxml-license
-Requires: poxml-man
+Requires: poxml-license = %{version}-%{release}
+Requires: poxml-man = %{version}-%{release}
 
 %description bin
 bin components for the poxml package.
@@ -51,27 +51,27 @@ man components for the poxml package.
 
 
 %prep
-%setup -q -n poxml-18.08.0
+%setup -q -n poxml-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535238909
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549910643
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535238909
+export SOURCE_DATE_EPOCH=1549910643
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/poxml
-cp COPYING %{buildroot}/usr/share/doc/poxml/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/doc/poxml/COPYING.DOC
-cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/doc/poxml/cmake_modules_COPYING-CMAKE-SCRIPTS
+mkdir -p %{buildroot}/usr/share/package-licenses/poxml
+cp COPYING %{buildroot}/usr/share/package-licenses/poxml/COPYING
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/poxml/COPYING.DOC
+cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/poxml/cmake_modules_COPYING-CMAKE-SCRIPTS
 pushd clr-build
 %make_install
 popd
@@ -87,13 +87,13 @@ popd
 /usr/bin/xml2pot
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/poxml/COPYING
-/usr/share/doc/poxml/COPYING.DOC
-/usr/share/doc/poxml/cmake_modules_COPYING-CMAKE-SCRIPTS
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/poxml/COPYING
+/usr/share/package-licenses/poxml/COPYING.DOC
+/usr/share/package-licenses/poxml/cmake_modules_COPYING-CMAKE-SCRIPTS
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/ca/man1/po2xml.1
 /usr/share/man/ca/man1/split2po.1
 /usr/share/man/ca/man1/swappo.1
