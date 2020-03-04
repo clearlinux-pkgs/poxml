@@ -6,11 +6,11 @@
 #
 Name     : poxml
 Version  : 19.12.2
-Release  : 16
+Release  : 17
 URL      : https://download.kde.org/stable/release-service/19.12.2/src/poxml-19.12.2.tar.xz
 Source0  : https://download.kde.org/stable/release-service/19.12.2/src/poxml-19.12.2.tar.xz
 Source1  : https://download.kde.org/stable/release-service/19.12.2/src/poxml-19.12.2.tar.xz.sig
-Summary  : Translates DocBook XML files using gettext po files
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0
 Requires: poxml-bin = %{version}-%{release}
@@ -58,10 +58,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1581050086
+export SOURCE_DATE_EPOCH=1583359097
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -75,7 +74,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1581050086
+export SOURCE_DATE_EPOCH=1583359097
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/poxml
 cp %{_builddir}/poxml-19.12.2/COPYING %{buildroot}/usr/share/package-licenses/poxml/a21ac62aee75f8fcb26b1de6fc90e5eea271854c
