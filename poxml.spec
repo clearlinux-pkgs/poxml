@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : poxml
-Version  : 19.12.2
-Release  : 17
-URL      : https://download.kde.org/stable/release-service/19.12.2/src/poxml-19.12.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/19.12.2/src/poxml-19.12.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/19.12.2/src/poxml-19.12.2.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 19.12.3
+Release  : 18
+URL      : https://download.kde.org/stable/release-service/19.12.3/src/poxml-19.12.3.tar.xz
+Source0  : https://download.kde.org/stable/release-service/19.12.3/src/poxml-19.12.3.tar.xz
+Source1  : https://download.kde.org/stable/release-service/19.12.3/src/poxml-19.12.3.tar.xz.sig
+Summary  : Translates DocBook XML files using gettext po files
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0
 Requires: poxml-bin = %{version}-%{release}
@@ -50,17 +50,18 @@ man components for the poxml package.
 
 
 %prep
-%setup -q -n poxml-19.12.2
-cd %{_builddir}/poxml-19.12.2
+%setup -q -n poxml-19.12.3
+cd %{_builddir}/poxml-19.12.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583359097
+export SOURCE_DATE_EPOCH=1583523656
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -74,12 +75,12 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1583359097
+export SOURCE_DATE_EPOCH=1583523656
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/poxml
-cp %{_builddir}/poxml-19.12.2/COPYING %{buildroot}/usr/share/package-licenses/poxml/a21ac62aee75f8fcb26b1de6fc90e5eea271854c
-cp %{_builddir}/poxml-19.12.2/COPYING.DOC %{buildroot}/usr/share/package-licenses/poxml/fcbf818f92ef8679a88f3778b12b4c8b5810545b
-cp %{_builddir}/poxml-19.12.2/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/poxml/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/poxml-19.12.3/COPYING %{buildroot}/usr/share/package-licenses/poxml/a21ac62aee75f8fcb26b1de6fc90e5eea271854c
+cp %{_builddir}/poxml-19.12.3/COPYING.DOC %{buildroot}/usr/share/package-licenses/poxml/fcbf818f92ef8679a88f3778b12b4c8b5810545b
+cp %{_builddir}/poxml-19.12.3/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/poxml/ff3ed70db4739b3c6747c7f624fe2bad70802987
 pushd clr-build
 %make_install
 popd
