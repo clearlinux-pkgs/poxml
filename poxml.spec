@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : poxml
-Version  : 20.04.0
-Release  : 19
-URL      : https://download.kde.org/stable/release-service/20.04.0/src/poxml-20.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.0/src/poxml-20.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.0/src/poxml-20.04.0.tar.xz.sig
-Summary  : Translates DocBook XML files using gettext po files
+Version  : 20.04.1
+Release  : 20
+URL      : https://download.kde.org/stable/release-service/20.04.1/src/poxml-20.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.1/src/poxml-20.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.1/src/poxml-20.04.1.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0
 Requires: poxml-bin = %{version}-%{release}
@@ -18,6 +18,7 @@ Requires: poxml-license = %{version}-%{release}
 Requires: poxml-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
 BuildRequires : gettext-dev
 BuildRequires : qtbase-dev mesa-dev
 
@@ -50,37 +51,36 @@ man components for the poxml package.
 
 
 %prep
-%setup -q -n poxml-20.04.0
-cd %{_builddir}/poxml-20.04.0
+%setup -q -n poxml-20.04.1
+cd %{_builddir}/poxml-20.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587675187
+export SOURCE_DATE_EPOCH=1589830615
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1587675187
+export SOURCE_DATE_EPOCH=1589830615
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/poxml
-cp %{_builddir}/poxml-20.04.0/COPYING %{buildroot}/usr/share/package-licenses/poxml/a21ac62aee75f8fcb26b1de6fc90e5eea271854c
-cp %{_builddir}/poxml-20.04.0/COPYING.DOC %{buildroot}/usr/share/package-licenses/poxml/fcbf818f92ef8679a88f3778b12b4c8b5810545b
-cp %{_builddir}/poxml-20.04.0/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/poxml/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/poxml-20.04.1/COPYING %{buildroot}/usr/share/package-licenses/poxml/a21ac62aee75f8fcb26b1de6fc90e5eea271854c
+cp %{_builddir}/poxml-20.04.1/COPYING.DOC %{buildroot}/usr/share/package-licenses/poxml/fcbf818f92ef8679a88f3778b12b4c8b5810545b
+cp %{_builddir}/poxml-20.04.1/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/poxml/ff3ed70db4739b3c6747c7f624fe2bad70802987
 pushd clr-build
 %make_install
 popd
